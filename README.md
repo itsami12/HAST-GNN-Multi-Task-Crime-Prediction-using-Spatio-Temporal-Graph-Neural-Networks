@@ -232,4 +232,4 @@ This project is released under the MIT License.
 
 # Acknowledgment
 
-This research utilized the Chicago Crime Dataset provided by the Chicago Police Department and City of Chicago Data Portal.
+This research utilized the Chicago Crime Dataset provided by the Chicago Police Department and City of Chicago Data Portal.   
