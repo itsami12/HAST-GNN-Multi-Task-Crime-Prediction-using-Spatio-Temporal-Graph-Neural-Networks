@@ -220,15 +220,7 @@ HAST-GNN/
 
 ---
 
-# Citation
 
-```bibtex
-@article{hastgnn2026,
-  title={HAST-GNN: A Hierarchical Adaptive Spatio-Temporal Graph Neural Network for Multi-Task Crime Prediction in Urban Areas of the United States},
-  author={Your Name},
-  year={2026}
-}
-```
 
 ---
 
