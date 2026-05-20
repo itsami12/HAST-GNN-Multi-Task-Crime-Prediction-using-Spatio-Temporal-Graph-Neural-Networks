@@ -1,170 +1,174 @@
-# HAST-GNN: Multi-Task Crime Prediction using Spatio-Temporal Graph Neural Networks
+# A-EFN: Unified Detection of Deepfake and Fraudulent Audio in Emergency Communication Systems
 
-HAST-GNN (Hierarchical Adaptive Spatio-Temporal Graph Neural Network) is a deep learning framework designed for multi-task crime prediction, hotspot forecasting, and urban crime analysis using large-scale spatio-temporal crime datasets. The framework combines temporal attention learning, hierarchical graph aggregation, crime-type interaction modeling, and multitask optimization for intelligent crime forecasting in large urban environments of the United States.
+## Overview
 
-The proposed architecture was evaluated using the Chicago Crime Dataset containing approximately 7.69 million crime events collected between 2001 and 2025 across 77 community areas.
+A-EFN (Advanced Equilibrium Field Network) is a multitask deep learning framework designed for:
 
----
+- Audio Deepfake Detection
+- Fake Emergency Call Detection
+- Adversarial Robustness Evaluation
 
-# Features
-
-- Multi-task crime prediction framework
-- Crime hotspot detection
-- Hotspot location prediction
-- Crime type classification
-- Crime-hour forecasting
-- Crime count prediction
-- Crime trend prediction
-- Hierarchical graph learning
-- Temporal attention learning
-- Adaptive crime-type interaction modeling
-- Large-scale spatio-temporal crime forecasting
+The framework combines equilibrium based representation learning with multitask classification to detect both AI generated speech and fraudulent emergency communication within a single architecture.
 
 ---
 
-# Architecture
+## Features
 
-The proposed HAST-GNN architecture consists of the following major components:
-
-## 1. Input Projection Layer
-Transforms raw crime features into higher-dimensional latent representations.
-
-## 2. ARATA Temporal Learning Module
-Adaptive Retentive Attention Temporal Aggregation module for capturing short-term and long-term temporal crime dependencies.
-
-## 3. CTIG Crime-Type Interaction Graph
-Models hidden relationships and interactions between different crime categories.
-
-## 4. AHG Hierarchical Graph Layer
-Performs hierarchical graph learning using:
-- Fine-grained community graph
-- Coarse district-level graph
-
-## 5. MAMTO Multi-Task Output Framework
-Handles multiple prediction tasks simultaneously including:
-- Hotspot detection
-- Crime type prediction
-- Crime-hour prediction
-- Crime count forecasting
-- Crime trend prediction
+- Unified multitask framework
+- Deepfake audio detection
+- Fake emergency call detection
+- Equilibrium based learning
+- Focal loss optimization
+- Conflict loss regularization
+- FGSM adversarial robustness testing
+- SMOTE balancing
+- Audio augmentation
+- Threshold optimization
 
 ---
 
-# Dataset
+## Datasets Used
 
-The framework uses the official Chicago Crime Dataset:
+### 1. Fake-or-Real (FoR)
+Used for real and fake speech detection.
 
-Dataset: Crimes - 2001 to Present  
-Source: Chicago Police Department  
-Records: ~7.69 million crime events  
-Coverage: 2001 – 2025  
-Community Areas: 77  
+### 2. ASVspoof2019
+Used for spoofed and AI generated speech detection.
 
-Dataset Link:
-https://data.cityofchicago.org/Public-Safety/Crimes-2001-to-Present/ijzp-q8t2
+### 3. 911 Recordings Dataset
+Used for emergency fraud detection.
 
 ---
 
-# Data Preprocessing
+## Dataset Labels
 
-The preprocessing pipeline includes:
-
-- Missing value removal
-- Temporal feature extraction
-- Community-area aggregation
-- Rolling statistical features
-- Crime-type encoding
-- Crime-hour bucket generation
-- Spatial feature engineering
-- Temporal sequence generation
-- Feature normalization using StandardScaler
-
-Generated Features:
-- Temporal features
-- Spatial features
-- Crime-type features
-- Rolling trend statistics
-- Hour-bucket distributions
-- Location-specific crime frequencies
-
-Total Engineered Features: 88
+| Label | Meaning |
+|-------|---------|
+| 0 | Real Audio |
+| 1 | Deepfake / Spoofed Audio |
+| 2 | Fake Emergency Call |
 
 ---
 
-# Model Configuration
+## Architecture
+
+The proposed A-EFN architecture contains:
+
+- Feature Projection Layer
+- Equilibrium Energy Function
+- Interaction Transformation Layer
+- Deepfake Detection Head
+- Fraud Detection Head
+- Equilibrium Optimization Solver
+
+---
+
+## Feature Extraction
+
+The framework extracts an 89 dimensional feature vector including:
+
+- MFCC Mean
+- MFCC Standard Deviation
+- Spectral Contrast
+- Zero Crossing Rate
+- RMS Energy
+
+---
+
+## Data Augmentation
+
+Fake emergency calls were augmented using:
+
+- Noise Injection
+- Pitch Shifting
+- Time Stretching
+- Volume Scaling
+
+Augmentation factor:
+- 36 fake emergency calls → 360 augmented samples
+
+---
+
+## Loss Functions
+
+### Focal Loss
+Used for handling class imbalance and difficult samples.
+
+### Conflict Loss
+Used for improving feature separation between classes.
+
+---
+
+## Hyperparameters
 
 | Hyperparameter | Value |
 |---|---|
-| Hidden Dimension | 96 |
-| Batch Size | 16 |
-| Epochs | 120 |
-| Learning Rate | 0.0002 |
-| Weight Decay | 0.0001 |
-| Optimizer | AdamW |
-| Scheduler | OneCycleLR |
-| Graph Attention Heads | 4 |
-| Graph Layers | 3 |
-| Dropout | 0.30 |
-| Sequence Length | 60 |
-| Crime Classes | 10 |
-| Hour Buckets | 8 |
+| Learning Rate | 0.001 |
+| Batch Size | 32 |
+| Epochs | 35 |
+| Optimizer | Adam |
+| Hidden Dimension | 128 |
+| Dropout | 0.5 |
+| Scheduler | ReduceLROnPlateau |
 
 ---
 
-# Final Results
+## Results
 
-## Hotspot Detection
-- ROC-AUC: 0.9495
-- F1 Score: 0.7591
+### Deepfake Detection
+- Accuracy: 98.11%
+- ROC-AUC: 0.9987
+- PR-AUC: 0.9989
 
-## Hotspot Location Prediction
-- Haversine MAE: 1.39 km
-- Within 1 km Accuracy: 75.5%
-
-## Crime Type Prediction
-- Accuracy: 60.17%
-- Weighted F1 Score: 0.6534
-
-## Crime-Hour Prediction
-- Accuracy: 54.38%
-- Weighted F1 Score: 0.5501
-
-## Crime Count Forecasting
-- Pearson Correlation: 0.8529
-- Count MAE: 2.69 crimes/day
-
-## Crime Trend Prediction
-- Accuracy: 94.25%
+### Fake Emergency Detection
+- Accuracy: 96.21%
+- ROC-AUC: 0.9919
+- PR-AUC: 0.9207
 
 ---
 
-# Installation
+## Adversarial Robustness (FGSM)
+
+| Epsilon | Accuracy | F1 Score |
+|---|---|---|
+| 0.01 | 96.66% | 93.39% |
+| 0.03 | 95.31% | 91.10% |
+| 0.05 | 93.91% | 88.59% |
+
+---
+
+## Project Structure
 
 ```bash
-git clone https://github.com/your-username/HAST-GNN.git
-cd HAST-GNN
+A-EFN/
+│
+├── datasets/
+├── models/
+├── preprocessing/
+├── feature_extraction/
+├── training/
+├── evaluation/
+├── adversarial_testing/
+├── results/
+├── README.md
+└── requirements.txt
+```
+
+---
+
+## Installation
+
+```bash
+git clone https://github.com/yourusername/A-EFN.git
+
+cd A-EFN
+
 pip install -r requirements.txt
 ```
 
 ---
 
-# Requirements
-
-```bash
-torch
-torch-geometric
-numpy
-pandas
-scikit-learn
-matplotlib
-networkx
-scipy
-tqdm
-```
-
----
-
-# Run Training
+## Run Training
 
 ```bash
 python train.py
@@ -172,7 +176,7 @@ python train.py
 
 ---
 
-# Run Evaluation
+## Run Evaluation
 
 ```bash
 python evaluate.py
@@ -180,64 +184,44 @@ python evaluate.py
 
 ---
 
-# Project Structure
+## Run Adversarial Testing
 
 ```bash
-HAST-GNN/
-│
-├── data/
-├── models/
-├── preprocessing/
-├── graphs/
-├── training/
-├── evaluation/
-├── results/
-├── utils/
-├── train.py
-├── evaluate.py
-├── requirements.txt
-└── README.md
+python fgsm_attack.py
 ```
 
 ---
 
-# Research Contributions
+## Research Contribution
 
-- Proposed a unified multi-task crime forecasting framework
-- Combined temporal attention with hierarchical graph learning
-- Modeled crime-type interactions dynamically
-- Performed simultaneous hotspot and crime forecasting
-- Evaluated on large-scale real-world U.S. crime dataset
-- Improved spatio-temporal crime understanding using multitask optimization
+This project introduces:
 
----
-
-# Limitations
-
-- Lower-frequency hour intervals such as 3–6h and 6–9h were more difficult to predict accurately
-- Exact street-level coordinates were not available due to dataset privacy protection
-- Fixed 60-day temporal windows may not fully capture adaptive crime behaviors
+- First unified framework for deepfake and fake emergency detection
+- Equilibrium based multitask learning
+- Adversarial robustness evaluation for emergency audio
+- Unified public dataset integration
 
 ---
 
-# Citation
+## Future Work
 
-```bibtex
-@article{hastgnn2026,
-  title={HAST-GNN: A Hierarchical Adaptive Spatio-Temporal Graph Neural Network for Multi-Task Crime Prediction in Urban Areas of the United States},
-  author={Your Name},
-  year={2026}
-}
-```
+Future work will focus on:
 
----
-
-# License
-
-This project is released under the MIT License.
+- Urdu paired audio-text datasets
+- Pakistani emergency call datasets
+- Real time deployment systems
+- Multilingual deepfake detection
+- Lightweight mobile deployment
 
 ---
 
-# Acknowledgment
 
-This research utilized the Chicago Crime Dataset provided by the Chicago Police Department and City of Chicago Data Portal.
+
+FAST-NUCES Islamabad  
+Department of Artificial Intelligence and Data Science
+
+---
+
+## License
+
+This project is developed for research and academic purposes.
